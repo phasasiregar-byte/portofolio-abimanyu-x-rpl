@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portofolio Siswa SMK RPL</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+    }
+    header {
+      background: #0080ff;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #34495e;
+    }
+    nav a {
+      color: white;
+      padding: 14px 20px;
+      text-decoration: none;
+      display: block;
+    }
+    nav a:hover {
+      background: #2c3e50;
+    }
+    section {
+      display: none;
+      padding: 20px;
+      animation: fadeIn 0.3s;
+    }
+    section.active {
+      display: block;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 10px 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    footer {
+      background: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: 40px;
+    }
+    .btn {
+      display: inline-block;
+      background: #3498db;
+      color: white;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: 10px;
+    }
+    .btn:hover {
+      background: #2980b9;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Portofolio Siswa SMK RPL</h1>
+    <p>Nama: <span id="nama">Nama Kamu</span> | Kelas: <span id="kelas">X RPL</span> | Sekolah: <span id="sekolah">SMK Contoh Jakarta</span></p>
+  </header>
+
+  <nav>
+    <a href="#" onclick="tampil('dataPribadi')">Data Pribadi</a>
+    <a href="#" onclick="tampil('tugas')">Tugas</a>
+    <a href="#" onclick="tampil('project')">Project</a>
+    <a href="#" onclick="tampil('lainnya')">Lainnya</a>
+  </nav>
+
+  <!-- DATA PRIBADI -->
+  <section id="dataPribadi" class="active">
+    <h2>Data Pribadi</h2>
+    <div class="card">
+      <p><strong>Nama:</strong> <span id="dataNama">Abimanyu</span></p>
+      <p><strong>Kelas:</strong> <span id="dataKelas">X RPL</span></p>
+      <p><strong>Sekolah:</strong> <span id="dataSekolah">SMKN 20 Jakarta</span></p>
+      <button class="btn" onclick="editProfil()">Edit Profil</button>
+    </div>
+  </section>
+
+  <!-- TUGAS -->
+  <section id="tugas">
+    <h2>Daftar Tugas</h2>
+    <div id="listTugas"></div>
+    <button class="btn" onclick="tambahTugas()">Tambah Tugas</button>
+  </section>
+
+  <!-- PROJECT -->
+  <section id="project">
+    <h2>Daftar Project</h2>
+    <div id="listProject"></div>
+    <button class="btn" onclick="tambahProject()">Tambah Project</button>
+  </section>
+
+  <!-- LAINNYA -->
+  <section id="lainnya">
+    <h2>Lainnya</h2>
+    <div class="card">
+      <p>Kamu bisa menambahkan dokumentasi, prestasi, atau kegiatan lainnya di sini.</p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Portofolio Siswa SMK RPL
+  </footer>
+
+  <script>
+    function tampil(menu) {
+      document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+      document.getElementById(menu).classList.add("active");
+    }
+
+    function editProfil() {
+      const nama = prompt("Masukkan nama:", document.getElementById("dataNama").textContent);
+      const kelas = prompt("Masukkan kelas:", document.getElementById("dataKelas").textContent);
+      const sekolah = prompt("Masukkan sekolah:", document.getElementById("dataSekolah").textContent);
+      if(nama) {
+        document.getElementById("dataNama").textContent = nama;
+        document.getElementById("nama").textContent = nama;
+      }
+      if(kelas) {
+        document.getElementById("dataKelas").textContent = kelas;
+        document.getElementById("kelas").textContent = kelas;
+      }
+      if(sekolah) {
+        document.getElementById("dataSekolah").textContent = sekolah;
+        document.getElementById("sekolah").textContent = sekolah;
+      }
+    }
+
+    function tambahTugas() {
+      const judul = prompt("Judul Tugas:");
+      const deskripsi = prompt("Deskripsi Tugas:");
+      if(judul && deskripsi){
+        const div = document.createElement("div");
+        div.className = "card";
+        div.innerHTML = `<h4>${judul}</h4><p>${deskripsi}</p>`;
+        document.getElementById("listTugas").appendChild(div);
+      }
+    }
+
+    function tambahProject() {
+      const judul = prompt("Judul Project:");
+      const deskripsi = prompt("Deskripsi Project:");
+      if(judul && deskripsi){
+        const div = document.createElement("div");
+        div.className = "card";
+        div.innerHTML = `<h4>${judul}</h4><p>${deskripsi}</p>`;
+        document.getElementById("listProject").appendChild(div);
+      }
+    }
+  </script>
+</body>
+</html>
